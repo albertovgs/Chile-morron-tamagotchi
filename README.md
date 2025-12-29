@@ -98,7 +98,7 @@ Este proyecto está bajo la Licencia ISC. Ver el archivo [LICENSE](LICENSE) para
 Hecho con ❤️ por [@alberto_vgs](https://github.com/alberto_vgs).
 
 ## 🌐 Demo
-¡Juega en línea en [GitHub Pages](https://alberto_vgs.github.io/Chile-morron-tamagotchi/)!
+¡Juega en línea en [GitHub Pages](https://albertovgs.github.io/Chile-morron-tamagotchi/)!
 
 ---
 
