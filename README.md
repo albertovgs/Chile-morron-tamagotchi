@@ -1,6 +1,6 @@
 # Chile-morron-tamagotchi
 
-![Tamagotchi Screenshot](https://via.placeholder.com/800x400?text=Chile-morron-tamagotchi) <!-- Replace with actual screenshot -->
+![Tamagotchi Screenshot](https://github.com/albertovgs/Chile-morron-tamagotchi/blob/main/src/img/Screenshot.png) <!-- Replace with actual screenshot -->
 
 Un Tamagotchi simple y adorable con sprites de Cinnamon Roll de Yellow Kitty. Cuida de tu pequeña mascota virtual interactuando con ella a través de acciones como jugar, dormir y comer. ¡Mantén sus niveles de infelicidad, sueño y hambre bajos para evitar que se vaya al más allá!
 
