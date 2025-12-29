@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinnamonroll</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./src/img/favicon.gif" type="image/x-icon">
+</head>
+<body>
+    <div class="console">
+        <div class="display">
+            <div class="texts">
+                <p class="title" id="title"></p>
+            </div>
+            <div class="tamagotchi" id="tamagotchi">
+                <img src="./src/sprites/cinammonroll.png" alt="Cinnamonroll" class="cinammonroll" id="sprite">
+            </div>
+        </div>
+        <div class="stats">
+            <p>Infelicidad: <span id="happiness">0</span></p>
+            <p>Sueño: <span id="sleepiness">0</span></p>
+            <p>Hambre: <span id="hunger">0</span></p>
+        </div>
+        <div class="buttons">
+            <button type="button" id="play">Jugar</button>
+            <button type="button" id="sleep">Dormir</button>
+            <button type="button" id="eat">Comer</button>
+        </div>
+        <div class="alberto_vgs">
+            <p>Hecho por @alberto_vgs</p>
+        </div>
+    </div>
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
