@@ -20,7 +20,7 @@ class Tamagotchi {
         sprite.height = 270;
         this.changeTitle('');
         sprite.style.opacity = '0.8';
-        sprite.src = './src/sprites/cinammonroll-stay.png';
+        sprite.src = './src/img/sprites/cinammonroll-stay.png';
         sprite.style.opacity = '1';
     }
     checkStats() {
@@ -31,9 +31,9 @@ class Tamagotchi {
             setTimeout(() => {
                 this.changeTitle('dead');
                 sprite.style.opacity = '0';
-                sprite.src = './src/sprites/cinammonroll-dead.png';
+                sprite.src = './src/img/sprites/cinammonroll-dead.png';
             }, 15000);
-            sprite.src = './src/sprites/cinammonroll-gost.png';
+            sprite.src = './src/img/sprites/cinammonroll-gost.png';
             sprite.style.opacity = '1';
             play.disabled = true;
             eat.disabled = true;
@@ -43,20 +43,20 @@ class Tamagotchi {
             this.changeTitle('isBoring');
             sprite.style.opacity = '0.8';
             sprite.height = 200;
-            sprite.src = './src/sprites/cinammonroll-boring.png';
+            sprite.src = './src/img/sprites/cinammonroll-boring.png';
             sprite.style.opacity = '1';
         }
         if (this.hunger >= 7 && this.isAlive) {
             this.changeTitle('isHungry');
             sprite.style.opacity = '0.8';
-            sprite.src = './src/sprites/cinammonroll-hungry.png';
+            sprite.src = './src/img/sprites/cinammonroll-hungry.png';
             sprite.style.opacity = '1';
         }
         if (this.sleepiness >= 7 && this.isAlive) {
             sprite.height = 220;
             this.changeTitle('isSleepy');
             sprite.style.opacity = '0.8';
-            sprite.src = './src/sprites/cinammonroll-tired.png';
+            sprite.src = './src/img/sprites/cinammonroll-tired.png';
             sprite.style.opacity = '1';
         }
     }

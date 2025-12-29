@@ -20,21 +20,21 @@ eat.addEventListener("click", eting);
 function simpleAction(){
     sprite.style.opacity = '0.8';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll.png';
+        sprite.src = './src/img/sprites/cinammonroll.png';
         sprite.style.opacity = '1';
         sprite.height = 230;
     }, 3000);
     
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-heart.png';
+        sprite.src = './src/img/sprites/cinammonroll-heart.png';
         sprite.style.opacity = '1';
         sprite.height = 230;
     }, 2000);
 
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-play.png';
+        sprite.src = './src/img/sprites/cinammonroll-play.png';
         sprite.style.opacity = '1';
         sprite.height = 230;
     }, 1000);
@@ -45,21 +45,21 @@ function simpleAction(){
 function sleeping(){
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll.png'
+        sprite.src = './src/img/sprites/cinammonroll.png'
         sprite.style.opacity = '1';
         sprite.height = 230;
     },3000);
 
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-up.png'
+        sprite.src = './src/img/sprites/cinammonroll-up.png'
         sprite.style.opacity = '0';
         sprite.height = 280;
     },2000);
 
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-sleep.png';
+        sprite.src = './src/img/sprites/cinammonroll-sleep.png';
         sprite.style.opacity = '1';
         sprite.height = 230;
     },1000);
@@ -70,20 +70,20 @@ function sleeping(){
 function eting(){
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll.png'
+        sprite.src = './src/img/sprites/cinammonroll.png'
         sprite.style.opacity = '1';
         sprite.height = 230;
     },3000);
 
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-full.png'
+        sprite.src = './src/img/sprites/cinammonroll-full.png'
         sprite.style.opacity = '0';
     },2000);
 
     sprite.style.opacity = '0';
     setTimeout(() => {
-        sprite.src = './src/sprites/cinammonroll-eat.png';
+        sprite.src = './src/img/sprites/cinammonroll-eat.png';
         sprite.style.opacity = '1';
     },1000);
 
