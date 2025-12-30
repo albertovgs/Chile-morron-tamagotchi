@@ -1,15 +1,16 @@
 {
-  "name": "tamagotchi",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "chile-morron-tamagotchi",
+  "version": "2.0.0",
+  "description": "Un Tamagotchi mejorado con sistema de guardado y progresión offline",
+  "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "npx lite-server"
+    "start": "npm run build && npx lite-server",
+    "dev": "tsc --watch & npx lite-server"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["tamagotchi", "game", "typescript", "virtual-pet"],
+  "author": "alberto_vgs",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

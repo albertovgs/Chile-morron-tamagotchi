@@ -2,13 +2,16 @@ const happiness = document.getElementById('happiness');
 const sleepiness = document.getElementById('sleepiness');
 const hunger = document.getElementById('hunger');
 function showHappinessChange(num) {
-    happiness.innerText = num.toString();
+    if (happiness)
+        happiness.innerText = num.toString();
 }
 function showSleepinessChange(num) {
-    sleepiness.innerHTML = num.toString();
+    if (sleepiness)
+        sleepiness.innerText = num.toString();
 }
 function showHungerChange(num) {
-    hunger.innerHTML = num.toString();
+    if (hunger)
+        hunger.innerText = num.toString();
 }
 export { showHappinessChange, showSleepinessChange, showHungerChange };
 //# sourceMappingURL=stats.js.map

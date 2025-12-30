@@ -3,8 +3,11 @@ declare class Tamagotchi {
     hunger: number;
     sleepiness: number;
     isAlive: boolean;
+    private intervals;
     constructor();
-    cinammonrollIsWaiting(): void;
+    cinnamonRollIsWaiting(): void;
+    private clearIntervals;
+    private setSpriteState;
     checkStats(): void;
     giveFood(): void;
     playWith(): void;
@@ -15,7 +18,7 @@ declare class Tamagotchi {
     getHappiness(): number;
     getHunger(): number;
     getSleepiness(): number;
-    changeTitle(actions: String): void;
+    changeTitle(actions: string): void;
 }
 export { Tamagotchi };
 //# sourceMappingURL=Tamagotchi.d.ts.map

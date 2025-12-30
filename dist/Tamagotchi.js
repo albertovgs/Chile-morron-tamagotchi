@@ -1,4 +1,5 @@
 import { showHappinessChange, showHungerChange, showSleepinessChange } from "./stats.js";
+import { GameState } from "./GameState.js";
 const sprite = document.getElementById("sprite");
 const title = document.querySelector("#title");
 const play = document.querySelector("#play");
@@ -6,26 +7,54 @@ const eat = document.querySelector("#eat");
 const sleep = document.querySelector("#sleep");
 class Tamagotchi {
     constructor() {
-        this.happiness = 5;
-        this.hunger = 5;
-        this.sleepiness = 5;
-        this.isAlive = true;
-        setInterval(this.makeUnhappy.bind(this), 20000);
-        setInterval(this.makeSleepy.bind(this), 60000);
-        setInterval(this.makeHungry.bind(this), 40000);
-        setInterval(this.cinammonrollIsWaiting.bind(this), 10000);
-        setInterval(this.checkStats.bind(this), 10000);
+        this.intervals = [];
+        // Intentar cargar datos guardados
+        const savedData = GameState.load();
+        if (savedData && savedData.isAlive) {
+            // Calcular progresión offline
+            const offlineProgress = GameState.calculateOfflineProgression(savedData);
+            this.happiness = offlineProgress.happiness;
+            this.hunger = offlineProgress.hunger;
+            this.sleepiness = offlineProgress.sleepiness;
+            this.isAlive = !(this.happiness === 10 && this.hunger === 10 && this.sleepiness === 10);
+        }
+        else {
+            this.happiness = 5;
+            this.hunger = 5;
+            this.sleepiness = 5;
+            this.isAlive = true;
+        }
+        this.intervals.push(setInterval(this.makeUnhappy.bind(this), 20000));
+        this.intervals.push(setInterval(this.makeSleepy.bind(this), 60000));
+        this.intervals.push(setInterval(this.makeHungry.bind(this), 40000));
+        this.intervals.push(setInterval(this.cinnamonRollIsWaiting.bind(this), 10000));
+        this.intervals.push(setInterval(this.checkStats.bind(this), 10000));
+        this.intervals.push(setInterval(() => GameState.save(this), 30000)); // Auto-save cada 30 segundos
     }
-    cinammonrollIsWaiting() {
+    cinnamonRollIsWaiting() {
+        if (!this.isAlive)
+            return;
         sprite.height = 270;
         this.changeTitle('');
         sprite.style.opacity = '0.8';
         sprite.src = './src/img/sprites/cinammonroll-stay.png';
         sprite.style.opacity = '1';
     }
+    clearIntervals() {
+        this.intervals.forEach(interval => clearInterval(interval));
+        this.intervals = [];
+    }
+    setSpriteState(titleKey, spriteSrc, height = 230) {
+        this.changeTitle(titleKey);
+        sprite.style.opacity = '0.8';
+        sprite.height = height;
+        sprite.src = spriteSrc;
+        sprite.style.opacity = '1';
+    }
     checkStats() {
         if (this.happiness === 10 && this.hunger === 10 && this.sleepiness === 10) {
             this.isAlive = false;
+            this.clearIntervals();
             this.changeTitle('help');
             sprite.style.opacity = '0.8';
             setTimeout(() => {
@@ -38,79 +67,77 @@ class Tamagotchi {
             play.disabled = true;
             eat.disabled = true;
             sleep.disabled = true;
+            return;
         }
-        if (this.happiness >= 7 && this.isAlive) {
-            this.changeTitle('isBoring');
-            sprite.style.opacity = '0.8';
-            sprite.height = 200;
-            sprite.src = './src/img/sprites/cinammonroll-boring.png';
-            sprite.style.opacity = '1';
+        if (!this.isAlive)
+            return;
+        if (this.happiness >= 7) {
+            this.setSpriteState('isBoring', './src/img/sprites/cinammonroll-boring.png', 200);
         }
-        if (this.hunger >= 7 && this.isAlive) {
-            this.changeTitle('isHungry');
-            sprite.style.opacity = '0.8';
-            sprite.src = './src/img/sprites/cinammonroll-hungry.png';
-            sprite.style.opacity = '1';
+        else if (this.hunger >= 7) {
+            this.setSpriteState('isHungry', './src/img/sprites/cinammonroll-hungry.png');
         }
-        if (this.sleepiness >= 7 && this.isAlive) {
-            sprite.height = 220;
-            this.changeTitle('isSleepy');
-            sprite.style.opacity = '0.8';
-            sprite.src = './src/img/sprites/cinammonroll-tired.png';
-            sprite.style.opacity = '1';
+        else if (this.sleepiness >= 7) {
+            this.setSpriteState('isSleepy', './src/img/sprites/cinammonroll-tired.png', 220);
         }
     }
     giveFood() {
+        if (!this.isAlive)
+            return;
         this.changeTitle('eat');
-        if (this.hunger > 0) {
-            this.hunger = Math.min(10, this.hunger - 2);
-        }
-        if (this.hunger <= 0) {
-            this.hunger = 0;
-        }
+        this.hunger = Math.max(0, this.hunger - 2);
         showHungerChange(this.hunger);
+        GameState.save(this);
     }
     playWith() {
+        if (!this.isAlive)
+            return;
         this.changeTitle('play');
-        if (this.happiness > 0) {
-            this.happiness = Math.min(10, this.happiness - 2);
-        }
-        if (this.happiness <= 0) {
-            this.happiness = 0;
-        }
+        this.happiness = Math.max(0, this.happiness - 2);
         showHappinessChange(this.happiness);
+        GameState.save(this);
     }
     sleepWell() {
+        if (!this.isAlive)
+            return;
         this.changeTitle('sleep');
-        if (this.sleepiness > 0) {
-            this.sleepiness = Math.min(10, this.sleepiness - 2);
-        }
-        if (this.sleepiness <= 0) {
-            this.sleepiness = 0;
-        }
+        this.sleepiness = Math.max(0, this.sleepiness - 2);
         showSleepinessChange(this.sleepiness);
+        GameState.save(this);
     }
     makeUnhappy() {
-        if (this.happiness < 10)
-            this.happiness = Math.max(0, this.happiness + 1);
-        else
+        if (!this.isAlive)
+            return this.happiness;
+        if (this.happiness < 10) {
+            this.happiness = this.happiness + 1;
+        }
+        else {
             this.happiness = 10;
+        }
         showHappinessChange(this.happiness);
         return this.happiness;
     }
     makeHungry() {
-        if (this.hunger < 10)
-            this.hunger = Math.max(0, this.hunger + 1);
-        else
+        if (!this.isAlive)
+            return this.hunger;
+        if (this.hunger < 10) {
+            this.hunger = this.hunger + 1;
+        }
+        else {
             this.hunger = 10;
+        }
         showHungerChange(this.hunger);
         return this.hunger;
     }
     makeSleepy() {
-        if (this.sleepiness < 10)
-            this.sleepiness = Math.max(0, (this.hunger < 7 ? this.sleepiness + 2 : this.sleepiness + 1));
-        else
+        if (!this.isAlive)
+            return this.sleepiness;
+        if (this.sleepiness < 10) {
+            this.sleepiness = this.hunger < 7 ? this.sleepiness + 2 : this.sleepiness + 1;
+        }
+        else {
             this.sleepiness = 10;
+        }
         showSleepinessChange(this.sleepiness);
         return this.sleepiness;
     }
